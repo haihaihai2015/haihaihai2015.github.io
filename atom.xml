@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://haihaihai2015.github.io</id>
-    <title>Hai,你好</title>
-    <updated>2021-10-19T13:35:17.893Z</updated>
+    <title>海</title>
+    <updated>2021-10-20T02:07:44.404Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://haihaihai2015.github.io"/>
     <link rel="self" href="https://haihaihai2015.github.io/atom.xml"/>
     <subtitle>来就来吧，还空手来</subtitle>
     <logo>https://haihaihai2015.github.io/images/avatar.png</logo>
     <icon>https://haihaihai2015.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Hai,你好</rights>
+    <rights>All rights reserved 2021, 海</rights>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://haihaihai2015.github.io/post/hello-gridea/</id>
