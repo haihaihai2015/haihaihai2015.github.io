@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://haihaihai2015.github.io</id>
     <title>海的博客</title>
-    <updated>2021-10-20T15:24:41.623Z</updated>
+    <updated>2021-10-21T01:13:52.396Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://haihaihai2015.github.io"/>
     <link rel="self" href="https://haihaihai2015.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://haihaihai2015.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 海的博客</rights>
     <entry>
-        <title type="html"><![CDATA[@ RabbitMq]]></title>
+        <title type="html"><![CDATA[@ SpringBoot整合RabbitMQ]]></title>
         <id>https://haihaihai2015.github.io/post/rabbitmq/</id>
         <link href="https://haihaihai2015.github.io/post/rabbitmq/">
         </link>
@@ -177,10 +177,9 @@ public  class RabbitMQConfig {
 </code></pre>
 <p>附上参考链接：<br>
 [https://blog.csdn.net/weixin_34209406/article/details/92568996 ]<br>
-[https://blog.csdn.net/weixin_43744059/article/details/106231698]</p>
-<ol start="3">
-<li>配置生产者</li>
-</ol>
+[https://blog.csdn.net/weixin_43744059/article/details/106231698]<br>
+[https://blog.csdn.net/qq_35387940/article/details/100514134]<br>
+3. 配置生产者</p>
 <ul>
 <li>生产者配置相对简单，只需要将 rabbitTemplate 类注入，调用 convertAndSend 方法，参数为交<strong>换机名称</strong>、<strong>队列名称</strong>、<strong>发送内容</strong>（注意与配置一一对应）</li>
 </ul>
