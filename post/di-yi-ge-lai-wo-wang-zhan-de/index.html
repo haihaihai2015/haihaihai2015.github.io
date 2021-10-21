@@ -16,7 +16,7 @@
 
   </head>
   <body>
-    <div class="main px-4 flex flex-col lg:flex-row">
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
       <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
   <div class="lg:sticky top-0">
     <div class="sidebar-content">
@@ -30,29 +30,9 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            你是因为什么事进来的？
+            文章目录
           </p>
-          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
+          <div class="toc-container hidden lg:block">
             
           </div>
         </div>
@@ -97,58 +77,39 @@
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
-        <h2 class="latest-article text-lg text-gray-700 mb-8">
-          <i class="ri-article-line"></i>
-          最新文章
-        </h2>
-        
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
-    
-      <a href="https://haihaihai2015.github.io/post/di-yi-ge-lai-wo-wang-zhan-de/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://haihaihai2015.github.io/post-images/di-yi-ge-lai-wo-wang-zhan-de.jpg'">
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">第一个来我网站的</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2021-10-21 / 1 min read
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/di-yi-ge-lai-wo-wang-zhan-de/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">第一个来我网站的</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-10-21 / 1 min read</div>
-    </div>
-  </section>
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://haihaihai2015.github.io/post-images/di-yi-ge-lai-wo-wang-zhan-de.jpg" alt="">
+        
+        <div class="post-content yue">
+          <p>你一定是仙女吧💑</p>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${1 * 0.2}s` }">
-    
-      <a href="https://haihaihai2015.github.io/post/rabbitmq/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://haihaihai2015.github.io/post-images/rabbitmq.webp'">
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/rabbitmq/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ SpringBoot整合RabbitMQ</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-10-20 / 6 min read</div>
-    </div>
-  </section>
 
-        <div class="read-more">
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://haihaihai2015.github.io/post/rabbitmq/">
+                <h3 class="post-title">
+                  @ SpringBoot整合RabbitMQ
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
           
         </div>
-        <div class="index-page">
-          <div class="pagination-container animated fadeIn">
-  
-  
-</div>
 
-        </div>
+        
+
       </div>
     </div>
 
