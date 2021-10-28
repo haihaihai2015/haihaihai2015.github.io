@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://haihaihai2015.github.io</id>
     <title>海的博客</title>
-    <updated>2021-10-27T08:33:25.662Z</updated>
+    <updated>2021-10-28T08:06:20.414Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://haihaihai2015.github.io"/>
     <link rel="self" href="https://haihaihai2015.github.io/atom.xml"/>
@@ -10,6 +10,23 @@
     <logo>https://haihaihai2015.github.io/images/avatar.png</logo>
     <icon>https://haihaihai2015.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 海的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[工作流、业务流、审批流的区别]]></title>
+        <id>https://haihaihai2015.github.io/post/gong-zuo-liu-ye-wu-liu-shen-pi-liu-de-qu-bie/</id>
+        <link href="https://haihaihai2015.github.io/post/gong-zuo-liu-ye-wu-liu-shen-pi-liu-de-qu-bie/">
+        </link>
+        <updated>2021-10-28T06:53:55.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>一直对这三种流的理解不够清晰，今天看到一个很妙的比喻</p>
+</blockquote>
+<h2 id="工作流火车轨道"><strong>工作流：火车轨道</strong></h2>
+<p>工作流代表的是一种方法或者工具。</p>
+<h2 id="业务流整个火车运营体系"><strong>业务流：整个火车运营体系</strong></h2>
+<p><strong>表单</strong>就好比<strong>火车</strong>，将各种数据传输出去，<strong>业务流</strong>可以很长，传输路线中有很多的站点，<strong>站点就是任务流程节点</strong>，在不同的节点需要对数据进行审查、编辑、<strong>批准</strong>、增加新数据。</p>
+<h2 id="审批流信号灯"><strong>审批流：信号灯</strong></h2>
+<p>随着整个火车运营体系不断壮大，火车也不止一辆，线路不止一条，为了规避种种不可控的风险，设置了 <strong>信号灯</strong>，用来控制<strong>业务流</strong>，降低风险。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Navicat常用快捷键/实用技巧]]></title>
         <id>https://haihaihai2015.github.io/post/navicat-chang-yong-kuai-jie-jian-shi-yong-ji-qiao/</id>
