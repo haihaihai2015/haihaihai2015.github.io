@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://haihaihai2015.github.io</id>
     <title>海的博客</title>
-    <updated>2021-10-29T02:00:46.594Z</updated>
+    <updated>2021-10-29T02:02:37.874Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://haihaihai2015.github.io"/>
     <link rel="self" href="https://haihaihai2015.github.io/atom.xml"/>
@@ -10,26 +10,6 @@
     <logo>https://haihaihai2015.github.io/images/avatar.png</logo>
     <icon>https://haihaihai2015.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 海的博客</rights>
-    <entry>
-        <title type="html"><![CDATA[🎬 看过的电影]]></title>
-        <id>https://haihaihai2015.github.io/post/movie/</id>
-        <link href="https://haihaihai2015.github.io/post/movie/">
-        </link>
-        <updated>2021-10-29T01:11:15.000Z</updated>
-        <content type="html"><![CDATA[<head>
-<meta name="referrer" content="same-origin">
-<script src="https://cdn.jsdelivr.net/combine/npm/react@17.0.2/umd/react.production.min.js,npm/react-dom@17.0.2/umd/react-dom.production.min.js,gh/iMuFeng/bmdb@3.4.1/dist/bmdb.js"></script>
-<div class="container"></div>
-<script>
-        new Bmdb({
-            type: 'movie',
-            selector: '.container',
-            secret: 'NRx8tkiffxMaUls1EQa2BbcasH9GDyzBnWZ9J8WSwu3v70b0rjCR7eMBwMbbk5gz',
-            noMoreDataTips: '没有更多数据了'
-        })
-    </script>
-</head>]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[工作流、业务流、审批流的区别]]></title>
         <id>https://haihaihai2015.github.io/post/gong-zuo-liu-ye-wu-liu-shen-pi-liu-de-qu-bie/</id>
