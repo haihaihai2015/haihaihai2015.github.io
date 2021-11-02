@@ -40,20 +40,30 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            文章目录
+            你是因为什么事进来的？
           </p>
-          <div class="toc-container hidden lg:block">
-            <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E7%9C%8B%E8%BF%87%E7%9A%84%E7%94%B5%E5%BD%B1">🎬 看过的电影</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
-</ul>
-</li>
-</ul>
-
+          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
           </div>
         </div>
       
@@ -153,59 +163,28 @@ document.write("你好阿！第" + visits + "位到访的朋友")
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">关于</h1>
-        <div class="text-sm text-gray-700 lg:my-8">
-          2019-01-25 / 1 min read
-        </div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
+        <h2 class="text-lg text-gray-700 mb-8">
+          <i class="ri-bookmark-line"></i> MySql
+        </h2>
         
-        <div class="post-content yue">
-          <blockquote>
-<p>很高兴认识你🤝</p>
-</blockquote>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="看过的电影">🎬 <a href="https://haihaihai2015.github.io/post/movie/">看过的电影</a></h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
-
-        </div>
-
+  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
+    
+    <div class="content">
+      <a href="https://haihaihai2015.github.io/post/sql-yu-ju-where-1-1-he-where-1lessgreater1-de-zuo-yong/">
+        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ Sql语句 where 1 = 1 和 where 1&lt;&gt;1 的作用</h2>
+      </a>
+      <div class="post-abstract text-gray-700 font-light my-4">
         
+      </div>
+      <div class="text-gray-400 text-sm font-light">2021-11-02 / 2 min read</div>
+    </div>
+  </section>
 
-
-        <div class="flex justify-between py-8">
-          
-
-          
-        </div>
-
-        
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: '408ccb9fda5aff0a518a',
-    clientSecret: 'cad19055dc126a0da74f4c8de30ffbc73f1891f0',
-    repo: 'haihaihai2015.github.io',
-    owner: 'haihaihai2015',
-    admin: ['haihaihai2015'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-          
-
-          
-        
+        <div class="pagination-container animated fadeIn">
+  
+  
+</div>
 
       </div>
     </div>
@@ -308,6 +287,5 @@ const closeMenu = () => {
 }
 </script>
   
-
   </body>
 </html>

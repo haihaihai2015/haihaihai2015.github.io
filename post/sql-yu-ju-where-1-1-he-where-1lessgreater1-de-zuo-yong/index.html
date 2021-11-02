@@ -46,10 +46,14 @@
             <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E7%9C%8B%E8%BF%87%E7%9A%84%E7%94%B5%E5%BD%B1">🎬 看过的电影</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li><a href="#11-%E6%B0%B8%E7%9C%9F">1=1 永真</a>
+<ul>
+<li><a href="#%E6%83%85%E5%86%B5%E4%B8%80">情况一</a></li>
+<li><a href="#%E6%83%85%E5%86%B5%E4%BA%8C">情况二</a></li>
+<li><a href="#where-1-1-%E7%9A%84%E5%BC%8A%E7%AB%AF">where 1 = 1 的弊端</a></li>
+</ul>
+</li>
+<li><a href="#11-%E6%B0%B8%E5%81%87">1&lt;&gt;1 永假</a></li>
 </ul>
 </li>
 </ul>
@@ -154,28 +158,86 @@ document.write("你好阿！第" + visits + "位到访的朋友")
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">关于</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">@ Sql语句 where 1 = 1 和 where 1&lt;&gt;1 的作用</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2019-01-25 / 1 min read
+          2021-11-02 / 2 min read
         </div>
         
         <div class="post-content yue">
-          <blockquote>
-<p>很高兴认识你🤝</p>
-</blockquote>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="看过的电影">🎬 <a href="https://haihaihai2015.github.io/post/movie/">看过的电影</a></h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+          <h2 id="11-永真">1=1 永真</h2>
+<p>这个语句的作用是：动态SQL拼接时，为了避免拼接条件不满足而导致语义不正确<br>
+比如：</p>
+<h3 id="情况一">情况一</h3>
+<pre><code class="language-java">　　string MySqlStr=”select * from table where”；
+
+　　if(Age.Text.Lenght&gt;0)
+　　{
+　　　　MySqlStr=MySqlStr+“Age=“+“'Age.Text'“；
+　　}
+
+　　if(Address.Text.Lenght&gt;0)
+　　{
+　　　　MySqlStr=MySqlStr+“and Address=“+“'Address.Text'“；
+　　}
+</code></pre>
+<p>如果上述的两个IF判断语句不成立，那么，最终的MySqlStr动态构造语句变为：</p>
+<p>MySqlStr=”select * from table where“</p>
+<p>由于where关键词后面需要使用条件，但是这条语句根本就不存在条件，所以，该语句就是一条错误的语句，肯定不能被执行，不仅报错，同时还不会查询到任何数据。</p>
+<h3 id="情况二">情况二</h3>
+<p>假如我们将上述的语句加上 <strong>where 1 = 1</strong>：</p>
+<pre><code class="language-java">　　string MySqlStr=”select * from table where  1=1 ”；
+       
+       if(Age.Text.Lenght&gt;0)
+　　{
+　　　　MySqlStr=MySqlStr+“and Age=“+“'Age.Text'“；
+　　}
+
+　　if(Address.Text.Lenght&gt;0)
+　　{
+　　　　MySqlStr=MySqlStr+“and Address=“+“'Address.Text'“；
+　　}
+</code></pre>
+<p>这样不管条件成立与否，都是正确的sql语句，相当于给了这条sql基本的查询条件</p>
+<h3 id="where-1-1-的弊端">where 1 = 1 的弊端</h3>
+<p>相当于全表查询，数据量大会导致查询过慢<br>
+<strong>这里也可以采用别的拼接写法：</strong></p>
+<pre><code class="language-java">StringBuilder buff = new StringBuilder(&quot;select * from T &quot;)
+String sp = &quot; WHERE &quot;;
+foreach() {
+if (...) {
+buff.append(sp).append(cond);
+sp = &quot; AND &quot;;
+}
+}
+</code></pre>
+<h2 id="11-永假">1&lt;&gt;1 永假</h2>
+<p>用于只取结构不取数据的场合,同理还有1=0等</p>
 
         </div>
 
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://haihaihai2015.github.io/tag/q6NtPLsTg/">
+            <span class="flex-auto">MySql</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://haihaihai2015.github.io/tag/KpwDfIs7W/">
+            <span class="flex-auto">实战经验值</span>
+          </a>
         
 
 
         <div class="flex justify-between py-8">
           
 
+          
+            <div class="next-post">
+              <a href="https://haihaihai2015.github.io/post/gong-zuo-liu-ye-wu-liu-shen-pi-liu-de-qu-bie/">
+                <h3 class="post-title">
+                  工作流、业务流、审批流的区别
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
           
         </div>
 
