@@ -40,30 +40,28 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            你是因为什么事进来的？
+            文章目录
           </p>
-          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B">问题排查流程</a></li>
+<li><a href="#%E4%B8%80-get%E8%AF%B7%E6%B1%82">一、get请求：</a></li>
+<li><a href="#%E4%BA%8C-post%E8%AF%B7%E6%B1%82">二、post请求</a></li>
+<li><a href="#%E4%B8%89-curl-%E5%8F%AF%E7%9B%B4%E6%8E%A5%E5%8F%91%E9%80%81%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%AF%B7%E6%B1%82%E4%BE%8B%E5%A6%82json">三、curl (可直接发送格式化请求例如json)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
           </div>
         </div>
       
@@ -163,64 +161,99 @@ document.write("你好阿！第" + visits + "位到访的朋友")
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
-        <h2 class="text-lg text-gray-700 mb-8">
-          <i class="ri-bookmark-line"></i> 实战经验值
-        </h2>
-        
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
-    
-      <a href="https://haihaihai2015.github.io/post/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://haihaihai2015.github.io/post-images/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang.jpg'">
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">@ 远程调用接口注意事项</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2021-11-09 / 2 min read
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ 远程调用接口注意事项</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-11-09 / 2 min read</div>
-    </div>
-  </section>
-
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${1 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/sql-yu-ju-where-1-1-he-where-1lessgreater1-de-zuo-yong/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ Sql语句 where 1 = 1 和 where 1&lt;&gt;1 的作用</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://haihaihai2015.github.io/post-images/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang.jpg" alt="">
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-11-02 / 2 min read</div>
-    </div>
-  </section>
+        <div class="post-content yue">
+          <p>接到需求远程调用其他接口查询数据，在本地测试没有问题，但在推送到服务以后，接口一直报错：<br>
+<img src="https://haihaihai2015.github.io/post-images/1636443731929.jpg" alt="" loading="lazy"></p>
+<p>然后远程调试提示405，405一般是请求方式的问题，比如要求get请求，发送的是post请求等，打印执行日志也是这个问题：<br>
+<img src="https://haihaihai2015.github.io/post-images/1636443879821.jpg" alt="" loading="lazy"></p>
+<p>解决方式：<strong>将域名换成IP地址</strong>，原因是对方服务器域名解析的时候不一致，可能有多个域名，但IP只有一个</p>
+<h4 id="问题排查流程">问题排查流程</h4>
+<ol>
+<li>先打印日志查看是否报错以及报错原因</li>
+<li>远程调试打断点分析</li>
+<li>服务器ping对方接口</li>
+<li>使用 Linux 直接发送请求调试</li>
+<li>找运维姐姐🙄<br>
+<strong>Linux发送请求格式：</strong></li>
+</ol>
+<h4 id="一-get请求">一、get请求：</h4>
+<p>1、使用curl命令：</p>
+<p>curl “http://www.baidu.com” 如果这里的URL指向的是一个文件或者一幅图都可以直接下载到本地</p>
+<p>curl -i “http://www.baidu.com” 显示全部信息</p>
+<p>curl -l “http://www.baidu.com” 只显示头部信息</p>
+<p>curl -v “http://www.baidu.com” 显示get请求全过程解析</p>
+<p>2、使用wget命令：</p>
+<p>wget “http://www.baidu.com”也可以</p>
+<h4 id="二-post请求">二、post请求</h4>
+<p>1、使用curl命令（通过-d参数，把访问参数放在里面）：</p>
+<p>curl -d “param1=value1¶m2=value2” “http://www.baidu.com”</p>
+<p>2、使用wget命令：（--post-data参数来实现）</p>
+<p>wget --post-data ‘user=foo&amp;password=bar’ http://www.baidu.com</p>
+<h4 id="三-curl-可直接发送格式化请求例如json">三、curl (可直接发送格式化请求例如json)</h4>
+<pre><code> 示例：目标url:http://fsc-inner.99bill.com/acs/deposit/{srcRef}
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${2 * 0.2}s` }">
-    
-      <a href="https://haihaihai2015.github.io/post/rabbitmq/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://haihaihai2015.github.io/post-images/rabbitmq.webp'">
+ 命令：curl -H &quot;Content-type: application/json&quot; -X POST -d '{/&quot;srcRef&quot;:&quot;1002&quot;}'http://fsc-inner.99bill.com/acs/deposit/1002
+</code></pre>
+
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/rabbitmq/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ SpringBoot整合RabbitMQ</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-10-20 / 6 min read</div>
-    </div>
-  </section>
 
-        <div class="pagination-container animated fadeIn">
-  
-  
-</div>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://haihaihai2015.github.io/tag/KpwDfIs7W/">
+            <span class="flex-auto">实战经验值</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://haihaihai2015.github.io/post/guan-yu-kua-yu/">
+                <h3 class="post-title">
+                  关于跨域
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '408ccb9fda5aff0a518a',
+    clientSecret: 'cad19055dc126a0da74f4c8de30ffbc73f1891f0',
+    repo: 'haihaihai2015.github.io',
+    owner: 'haihaihai2015',
+    admin: ['haihaihai2015'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
 
       </div>
     </div>
@@ -323,5 +356,6 @@ const closeMenu = () => {
 }
 </script>
   
+
   </body>
 </html>
