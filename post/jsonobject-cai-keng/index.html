@@ -40,30 +40,24 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            你是因为什么事进来的？
+            文章目录
           </p>
-          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E9%97%AE%E9%A2%981jsonobject%E5%88%A4%E7%A9%BA">问题1：JsonObject判空</a></li>
+<li><a href="#%E9%97%AE%E9%A2%982%E5%BD%93json%E7%9A%84value%E5%80%BC%E4%B8%BAnull%E6%97%B6">问题2：当JSON的value值为null时</a></li>
+<li><a href="#%E9%97%AE%E9%A2%983value%E4%B8%BAdate%E7%B1%BB%E5%9E%8B%E6%97%B6">问题3：value为Date类型时</a></li>
+<li><a href="#%E9%97%AE%E9%A2%984-value%E4%B8%BA%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%97%B6">问题4： value为空字符串（&quot;&quot;）时</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
           </div>
         </div>
       
@@ -163,87 +157,84 @@ document.write("你好阿！第" + visits + "位到访的朋友")
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
-        <h2 class="text-lg text-gray-700 mb-8">
-          <i class="ri-bookmark-line"></i> 实战经验值
-        </h2>
-        
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
-    
-      <a href="https://haihaihai2015.github.io/post/jsonobject-cai-keng/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://haihaihai2015.github.io/post-images/jsonobject-cai-keng.png'">
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">@ JsonObject 踩坑</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2021-11-17 / 1 min read
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/jsonobject-cai-keng/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ JsonObject 踩坑</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-11-17 / 1 min read</div>
-    </div>
-  </section>
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://haihaihai2015.github.io/post-images/jsonobject-cai-keng.png" alt="">
+        
+        <div class="post-content yue">
+          <h3 id="问题1jsonobject判空">问题1：JsonObject判空</h3>
+<p>如图：<br>
+<img src="https://haihaihai2015.github.io/post-images/1637132375347.png" alt="" loading="lazy"><br>
+JsonObject的判空<strong>不能直接使用 == null</strong> ，而是<strong>需要使用它提供的 .isEmpty()</strong></p>
+<h3 id="问题2当json的value值为null时">问题2：当JSON的value值为null时</h3>
+<p><img src="https://haihaihai2015.github.io/post-images/1637132382973.png" alt="" loading="lazy"><br>
+JSON的value值为null时，<strong>key会直接消失</strong><br>
+<img src="https://haihaihai2015.github.io/post-images/1637132388749.png" alt="" loading="lazy"><br>
+如果value为null时，key将直接被取消，<strong>get到null值</strong><br>
+所以在<strong>开发中</strong>，我们<strong>应该直接对 key 值进行 == null 的校验</strong> ，而不是在 toString 后校验，否则会报空指针异常<br>
+<img src="https://haihaihai2015.github.io/post-images/1637132409709.png" alt="" loading="lazy"></p>
+<h3 id="问题3value为date类型时">问题3：value为Date类型时</h3>
+<p><img src="https://haihaihai2015.github.io/post-images/1637132424022.png" alt="" loading="lazy"><br>
+JSONObject的value对以格式date存放的数据，toJSONString时显示为时间戳，取出来却是Date</p>
+<h3 id="问题4-value为空字符串时">问题4： value为空字符串（&quot;&quot;）时</h3>
+<p><img src="https://haihaihai2015.github.io/post-images/1637132430444.png" alt="" loading="lazy"><br>
+value为空字符串（&quot;&quot;）时，<strong>key可以被打印</strong>，<strong>输出值为空</strong>，<strong>空是指空字符串</strong>，<strong>并不是null</strong></p>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${1 * 0.2}s` }">
-    
-      <a href="https://haihaihai2015.github.io/post/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://haihaihai2015.github.io/post-images/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang.jpg'">
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ 远程调用接口注意事项</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-11-09 / 2 min read</div>
-    </div>
-  </section>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${2 * 0.2}s` }">
-    
-      <a href="https://haihaihai2015.github.io/post/sql-yu-ju-where-1-1-he-where-1lessgreater1-de-zuo-yong/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://haihaihai2015.github.io/post-images/sql-yu-ju-where-1-1-he-where-1lessgreater1-de-zuo-yong.jpg'">
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://haihaihai2015.github.io/tag/KpwDfIs7W/">
+            <span class="flex-auto">实战经验值</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://haihaihai2015.github.io/post/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang/">
+                <h3 class="post-title">
+                  @ 远程调用接口注意事项
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/sql-yu-ju-where-1-1-he-where-1lessgreater1-de-zuo-yong/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ Sql语句 where 1 = 1 和 where 1&lt;&gt;1 的作用</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-11-02 / 2 min read</div>
-    </div>
-  </section>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${3 * 0.2}s` }">
-    
-      <a href="https://haihaihai2015.github.io/post/rabbitmq/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://haihaihai2015.github.io/post-images/rabbitmq.webp'">
-        </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/rabbitmq/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ SpringBoot整合RabbitMQ</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-10-20 / 6 min read</div>
-    </div>
-  </section>
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
-        <div class="pagination-container animated fadeIn">
-  
-  
-</div>
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '408ccb9fda5aff0a518a',
+    clientSecret: 'cad19055dc126a0da74f4c8de30ffbc73f1891f0',
+    repo: 'haihaihai2015.github.io',
+    owner: 'haihaihai2015',
+    admin: ['haihaihai2015'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
 
       </div>
     </div>
@@ -346,5 +337,6 @@ const closeMenu = () => {
 }
 </script>
   
+
   </body>
 </html>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://haihaihai2015.github.io</id>
     <title>海的博客</title>
-    <updated>2021-11-10T11:06:22.443Z</updated>
+    <updated>2021-11-17T07:10:35.638Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://haihaihai2015.github.io"/>
     <link rel="self" href="https://haihaihai2015.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://haihaihai2015.github.io/images/avatar.png</logo>
     <icon>https://haihaihai2015.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 海的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[@ JsonObject 踩坑]]></title>
+        <id>https://haihaihai2015.github.io/post/jsonobject-cai-keng/</id>
+        <link href="https://haihaihai2015.github.io/post/jsonobject-cai-keng/">
+        </link>
+        <updated>2021-11-17T05:48:12.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[@ 远程调用接口注意事项]]></title>
         <id>https://haihaihai2015.github.io/post/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang/</id>
