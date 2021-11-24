@@ -43,19 +43,7 @@
             文章目录
           </p>
           <div class="toc-container hidden lg:block">
-            <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E4%B8%80-%E9%85%8D%E7%BD%AErabbitmq">一、配置RabbitMQ</a>
-<ul>
-<li><a href="#1%E5%AF%BC%E5%85%A5rabbit%E4%BE%9D%E8%B5%96">1.导入rabbit依赖</a></li>
-<li><a href="#2%E5%9C%A8config%E7%B1%BB%E9%85%8D%E7%BD%AEmq%E5%8F%82%E6%95%B0">2.在Config类配置Mq参数</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+            
           </div>
         </div>
       
@@ -156,292 +144,252 @@ document.write("你好阿！第" + visits + "位到访的朋友")
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">@ SpringBoot整合RabbitMQ</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">利用HTTP Debugger Pro + JAVA 实现抓取网课视频&amp;批量下载</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2021-10-20 / 6 min read
+          2021-11-24 / 6 min read
         </div>
         
-          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://haihaihai2015.github.io/post-images/rabbitmq.webp" alt="">
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="/post-images/li-yong-http-debugger-pro-java-shi-xian-zhua-qu-wang-ke-shi-pin-andpi-liang-xia-zai.jpg" alt="">
         
         <div class="post-content yue">
-          <p><strong>接到需求要将RabbitMQ与项目整合，用来异步发送消息，功能不是很重要，只是用来存储错误日志，本以为很简单的需求，结果开始了踩坑之旅</strong></p>
-<h2 id="一-配置rabbitmq">一、配置RabbitMQ</h2>
-<ul>
-<li>项目用的是spring boot搭建，所以采用全注解的方式进行整合</li>
-</ul>
-<h3 id="1导入rabbit依赖">1.导入rabbit依赖</h3>
-<blockquote>
-<p>注意：<br>
-如果依赖需要被几个子工程使用，就将依赖放入父工程，并对其进行版本约束，这里有个坑：</p>
-</blockquote>
+          <p>我们都知道Fidder可以实现抓包，但相对配置比较复杂，而使用 HTTP Debugger Pro 这个工具可以傻瓜式抓包，对于小白来说比较友好（没错我就是小白），进入正题：</p>
 <ol>
-<li>如果父工程采用的是&lt;dependencyManagement&gt;标签，则其他子工程无法自动引入依赖，需要手动添加(无需指定版本)；</li>
-<li>也可以直接另加一个&lt;dependencies&gt;的标签，仅在父工程引入依赖后即可</li>
-</ol>
-<pre><code class="language-xml">        &lt;!-- 暂指定RabbitMQ版本--&gt;
-        &lt;rabbitMq.version&gt;2.2.11.RELEASE&lt;/rabbitMq.version&gt;
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;
-        &lt;version&gt;${rabbitMq.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</code></pre>
-<h3 id="2在config类配置mq参数">2.在Config类配置Mq参数</h3>
+<li>下载 HTTP Debugger Pro<br>
+<img src="https://haihaihai2015.github.io/post-images/1637722095064.jpg" alt="" loading="lazy">
 <blockquote>
-<p>注意：<br>
-如果项目采用集群方式搭建，要注意api调用😭<br>
-如果启动后无法创建队列，可以手动去RabbitMq管理页面进行创建交换机并绑定队列；<br>
-无法自动创建应该是配置问题，可以在配置文件中实例化 RabbitAdmin 解决（还没有试🖐）</p>
+<p>下载中文版简单易懂，双击即可使用</p>
 </blockquote>
-<pre><code class="language-java">
+</li>
+<li>可以使用过滤器功能对相应进行过滤，比如如果我要爬视频：可以过滤类型为：video/mp4<br>
+<img src="https://haihaihai2015.github.io/post-images/1637722500359.jpg" alt="" loading="lazy"></li>
+<li>打开对应的app或者网站，点击对应的视频，就可以抓到url，如图：<br>
+<img src="https://haihaihai2015.github.io/post-images/1637723766697.jpg" alt="" loading="lazy">
+<blockquote>
+<p>一条视频往往会有多个响应，应该是为了应对不同的环境，但他的url地址是完全相同的，所以之后做过滤就好了</p>
+</blockquote>
+</li>
+<li>把要下载的视频全部点击一遍，全选然后复制url，也可以将所有响应导出为Json格式<br>
+<img src="https://haihaihai2015.github.io/post-images/1637724116297.jpg" alt="" loading="lazy"><br>
+<img src="https://haihaihai2015.github.io/post-images/1637724179706.jpg" alt="" loading="lazy"></li>
+<li>接下来就是下载了，批量下载网上有一些软件，但命名又需要手动命名，所以干脆写了一个java脚本，效果如下：<br>
+<img src="https://haihaihai2015.github.io/post-images/1637732085094.jpg" alt="" loading="lazy"><br>
+<img src="https://haihaihai2015.github.io/post-images/1637732132543.jpg" alt="" loading="lazy"><br>
+源码：</li>
+</ol>
+<pre><code class="language-java">package com.test.application.controller;
+
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.NumberFormat;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
- *
- * @Description:  RabbitMQ配置类
+ * @Author 海
+ * @Time 2021/11/17 19:26
+ * @Description:
  */
-@Configuration
 
-public  class RabbitMQConfig {
-
-    private static final Logger log = LoggerFactory.getLogger(RabbitMQConfig.class);
-//    服务地址
-    @Value(&quot;${rabbitmq.addresses}&quot;)
-    private String addresses;
-
-
-//    虚拟主机
-    @Value(&quot;${rabbitmq.virtual-host}&quot;)
-    private String virtualHost;
-
-
-    //    账户名
-    @Value(&quot;${rabbitmq.username}&quot;)
-    private String username;
-
-//    密码
-    @Value(&quot;${rabbitmq.password}&quot;)
-    private String password;
-
-//    路由键名称
-    @Value(&quot;${rabbitmq.routing-key}&quot;)
-    private String routingkey;
-
-//    交换机名称
-    @Value(&quot;${rabbitmq.exchange}&quot;)
-    private String exchange;
-
-//    队列名称
-    @Value(&quot;${rabbitmq.queue}&quot;)
-    private String queue;
-
-//    是否重试
-    @Value(&quot;${rabbitmq.enabled}&quot;)
-    private String enabled;
-
-//    最大重试次数
-    @Value(&quot;${rabbitmq.max-attempts}&quot;)
-    private String maxAttempts;
-
+@RestController
+@RequestMapping(&quot;/batchDownload&quot;)
+public class TestController {
 
     /**
-     * 交换机
-     *
+     * 解析JSON
+     * @param param
      * @return
      */
-    @Bean
-    public DirectExchange exchange() {
-        return new DirectExchange(exchange, true, false);
+    @RequestMapping(&quot;/parse&quot;)
+    public String parse(@RequestBody String param) {
+        JSONArray jsonArray = JSONObject.parseArray(param);
+        System.out.println(&quot;JsonArray的长度为&quot; + jsonArray.size());
+        LinkedList&lt;String&gt; list = new LinkedList&lt;&gt;();
+        for (int i = 0; i &lt; jsonArray.size(); i++) {
+            String url = jsonArray.getString(i);
+            list.add(url);
+        }
+        Collections.reverse(list); // 倒序排列
+        return JSONObject.toJSONString(list);
     }
 
     /**
-     * 队列
-     *
-     * @return
+     * 下载执行
+     * @param param
      */
-    @Bean
-    public Queue queue() {
-        Map&lt;String, Object&gt; args = new HashMap&lt;&gt;();
-
-        // x-message-ttl 这里声明当前队列消息存活时间
-        //args.put(&quot;x-message-ttl&quot;, 6000000);
-        return new Queue(queue, true, false, false, args);
+    @RequestMapping(&quot;/execute&quot;)
+    public void test(@RequestBody String param) {
+        JSONArray jsonArray = JSONObject.parseArray(param);
+        String filePath = &quot;C:\\Users\\82661\\Desktop\\软考视频\\&quot;;
+        System.out.println(&quot;共计&quot;+jsonArray.size()+&quot;个文件待下载&quot;);
+        for (int i = 0; i &lt; jsonArray.size(); i++) {
+            long startTime = System.currentTimeMillis();
+            File file = saveUrlAs(jsonArray.getString(i), filePath, (i + &quot;.mp4&quot;), &quot;GET&quot;,i+1);
+            long endTime = System.currentTimeMillis();
+            int remain = jsonArray.size() - 1;
+            System.out.println(&quot;下载\t&quot; + (i + &quot;.mp4&quot;) + &quot;\t用时&quot; + (endTime - startTime) / 1000 + &quot;秒\t&quot; + &quot;文件大小：&quot; + getSize(file) + &quot;\t剩余文件数：&quot; + remain + &quot;个&quot;);
+        }
     }
 
     /**
-     * 声明 oms队列 与 开发交换机的绑定关系
-     *
+     * 批量下载/命名视频
+     * @param url       下载url
+     * @param filePath  文件保存路径
+     * @param filename  文件名
+     * @param method    请求方法
      * @return
      */
-    @Bean
-    public Binding binding() {
-        return BindingBuilder.bind(queue()).to(exchange()).with(routingkey);
-    }
-
-    /**
-     * 创建连接工厂
-     * @return
-     */
-    @Bean(name = &quot;connectionFactoryMB&quot;)
-    public ConnectionFactory connectionFactory() {
-        CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory();
-        cachingConnectionFactory.setAddresses(addresses);
-        cachingConnectionFactory.setUsername(username);
-        cachingConnectionFactory.setPassword(password);
-        cachingConnectionFactory.setVirtualHost(virtualHost);
-
-        log.info(&quot;连接工厂设置完成，连接地址{}&quot;,addresses);
-        log.info(&quot;连接工厂设置完成，连接用户{}&quot;,username);
-        return cachingConnectionFactory;
-    }
-
-
-    /**
-     * 实例化RabbitTemplate工具类
-     * @param connectionFactory
-     * @return
-     */
-    @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactoryMB) {
-        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactoryMB);
-        return rabbitTemplate;
-    }
-
-    /**
-     * 设置明确默认值的监听器工厂
-     * @param connectionFactory
-     * @return
-     */
-    @Bean
-    public RabbitListenerContainerFactory&lt;?&gt; rabbitListenerContainerFactory(ConnectionFactory connectionFactory){
-        //SimpleRabbitListenerContainerFactory发现消息中有content_type有text就会默认将其转换成string类型的
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory);
-        return factory;
-    }
-
-}
-
-</code></pre>
-<p>附上参考链接：<br>
-[https://blog.csdn.net/weixin_34209406/article/details/92568996 ]<br>
-[https://blog.csdn.net/weixin_43744059/article/details/106231698]<br>
-[https://blog.csdn.net/qq_35387940/article/details/100514134]<br>
-3. 配置生产者</p>
-<ul>
-<li>生产者配置相对简单，只需要将 rabbitTemplate 类注入，调用 convertAndSend 方法，参数为交<strong>换机名称</strong>、<strong>队列名称</strong>、<strong>发送内容</strong>（注意与配置一一对应）</li>
-</ul>
-<pre><code class="language-java">/**
- *
- * @desc:  RabbitMq生产者实现类
- */
-@Component
-public class FailProducerService implements FailProducer {
-
-    private static final Logger log = LoggerFactory.getLogger(FeiHeProcessService.class);
-    //    交换机名称
-    @Value(&quot;${rabbitmq.exchange}&quot;)
-    private String exchange;
-
-    //    路由键名称
-    @Value(&quot;${rabbitmq.routing-key}&quot;)
-    private String routingKey;
-
-
-    //    注入RabbitTemplate
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
-
-
-    @Override
-    public void convertAndSend(FailureDto FailureDto) {
-
-
-//       调用RabbitTemplate发送消息
+    public static File saveUrlAs(String url, String filePath, String filename, String method,int j) {
+        //System.out.println(&quot;fileName----&gt;&quot;+filePath);
+        //创建不同的文件夹目录
+        File file = new File(filePath);
+        //判断文件夹是否存在
+        if (!file.exists()) {
+            //如果文件夹不存在，则创建新的的文件夹
+            file.mkdirs();
+        }
+        FileOutputStream fileOut = null;
+        HttpURLConnection conn = null;
+        InputStream inputStream = null;
         try {
-            String json = JSONObject.toJSONString(FailureDto);
-            rabbitTemplate.convertAndSend(exchange, routingKey, json);
-            log.info(&quot;发送消息内容：{}&quot;,json);
+            // 建立链接
+            URL httpUrl = new URL(url);
+            conn = (HttpURLConnection) httpUrl.openConnection();
+            //以Post方式提交表单，默认get方式
+            conn.setRequestMethod(method);
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            // post方式不能使用缓存
+            conn.setUseCaches(false);
+            //连接指定的资源
+            conn.connect();
+            //获取网络输入流
+            inputStream = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(inputStream);
+            //判断文件的保存路径后面是否以/结尾
+            if (!filePath.endsWith(&quot;/&quot;)) {
+
+                filePath += &quot;/&quot;;
+
+            }
+            //写入到文件（注意文件保存路径的后面一定要加上文件的名称）
+            fileOut = new FileOutputStream(filePath + filename);
+            BufferedOutputStream bos = new BufferedOutputStream(fileOut);
+            int i = readSize(url);
+            System.out.println(&quot;待下载文件大小：&quot; + i / 1024 / 1024 + &quot;M&quot;);
+            byte[] buf = new byte[4096];
+            int length = bis.read(buf);
+            int sizeRead = 0;
+            String now = null;
+            //保存文件
+            while (length != -1) {
+                bos.write(buf, 0, length);
+                length = bis.read(buf);
+
+                sizeRead += length;
+                // 创建一个数值格式化对象
+                NumberFormat numberFormat = NumberFormat.getInstance();
+                // 设置精确到小数点后2位
+                numberFormat.setMaximumFractionDigits(2);
+                String result = numberFormat.format((float) sizeRead / (float) i * 100);
+                if (!result.equals(now) &amp;&amp; result.length() &lt;= 2) {
+                    System.out.println(&quot;正在下载第&quot;+j+&quot;个文件：\t&quot; + filename + &quot;\t&quot; + result + &quot;%&quot;);
+                    now = result;
+                }
+            }
+            bos.close();
+            bis.close();
+            conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-}
-
-</code></pre>
-<ol start="4">
-<li>配置消费者</li>
-</ol>
-<ul>
-<li>消费者则更加简单，一个注解搞定 @RabbitListener（指定的队列名）</li>
-</ul>
-<blockquote>
-<p>注意：<br>
-配置完消费后，无法消费消息的情况：首先检查队列内有无待消费消息，启动类加上 @EnableRabbit 注解就可以接到了</p>
-</blockquote>
-<pre><code class="language-java">/**
- *
- * @Description:  RabbitMq消费者接口实现类
- */
-@Component
-public class FailConsumerService {
-    private static final Logger log = LoggerFactory.getLogger(FeiHeProcessService.class);
-    private static final String QUEUES = &quot;fail_log_queue&quot;;
-
-    @Autowired
-    private FailureDto failureDao;
-
-    @RabbitHandler(isDefault = true)
-    @RabbitListener(queues = QUEUES)
-    public void PrintLog(Message message) {
-
-        if (message != null &amp;&amp; message.getBody() != null) {
-            log.info(&quot;接收到消息为：{}&quot;, message);
-
-//        1.解析Json
-            FailureDto failureDto = null;
-            try {
-                failureDto = JSON.parseObject(new String(message.getBody()), FailureLogDto.class);
-            } catch (Exception e) {
-                e.printStackTrace();
-                log.error(&quot;Json转换实体失败：&quot;, e);
-            }
-//        2.存库
-            try {
-                failureDao.insertFailLog(failureDto);
-                log.info(&quot;保存成功！&quot;);
-            } catch (Exception e) {
-                e.printStackTrace();
-                log.error(&quot;错误日志保存失败：&quot;, e);
-            }
+            System.out.println(&quot;文件下载失败！！&quot;);
         }
 
+        return new File(filePath + filename);
     }
 
+    /**
+     * 预读取待下载文件大小
+     * @param urls
+     * @return
+     */
+    private static int readSize(String urls) {
+        int size = 0;
+        try {
+            URL url = new URL(urls);
+            URLConnection conn = url.openConnection();
+            size = conn.getContentLength();
+            conn.getInputStream().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return size;
+    }
+
+    /**
+     * 读取已下载文件大小
+     * @param f
+     * @return
+     */
+    private static String getSize(File f) {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(f);
+            int available = fis.available();
+            int size = available / 1024 / 1024;
+            return size + &quot;M&quot;;
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (null != fis) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
+            }
+        }
+        return null;
+    }
+
+
 }
+
 </code></pre>
 
         </div>
 
         
-          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://haihaihai2015.github.io/tag/KpwDfIs7W/">
-            <span class="flex-auto">实战经验值</span>
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://haihaihai2015.github.io/tag/39R7oZyLF/">
+            <span class="flex-auto">爬虫</span>
           </a>
         
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://haihaihai2015.github.io/post/di-yi-ge-lai-wo-wang-zhan-de/">
+
+          
+            <div class="next-post">
+              <a href="https://haihaihai2015.github.io/post/jsonobject-cai-keng/">
                 <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  第一个来我网站的
+                  @ JsonObject 踩坑
+                  <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
             </div>
-          
-
           
         </div>
 
