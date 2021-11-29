@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://haihaihai2015.github.io</id>
     <title>海的博客</title>
-    <updated>2021-11-24T05:44:25.979Z</updated>
+    <updated>2021-11-29T06:43:12.580Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://haihaihai2015.github.io"/>
     <link rel="self" href="https://haihaihai2015.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://haihaihai2015.github.io/images/avatar.png</logo>
     <icon>https://haihaihai2015.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 海的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[@ MySql 大数据量新增字段解决方案]]></title>
+        <id>https://haihaihai2015.github.io/post/mysql-da-shu-ju-liang-xin-zeng-zi-duan-jie-jue-fang-an/</id>
+        <link href="https://haihaihai2015.github.io/post/mysql-da-shu-ju-liang-xin-zeng-zi-duan-jie-jue-fang-an/">
+        </link>
+        <updated>2021-11-29T03:09:30.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[利用HTTP Debugger Pro + JAVA 实现抓取网课视频&批量下载]]></title>
         <id>https://haihaihai2015.github.io/post/li-yong-http-debugger-pro-java-shi-xian-zhua-qu-wang-ke-shi-pin-andpi-liang-xia-zai/</id>
@@ -72,12 +79,5 @@
         <link href="https://haihaihai2015.github.io/post/di-yi-ge-lai-wo-wang-zhan-de/">
         </link>
         <updated>2021-10-21T01:15:12.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[@ SpringBoot整合RabbitMQ]]></title>
-        <id>https://haihaihai2015.github.io/post/rabbitmq/</id>
-        <link href="https://haihaihai2015.github.io/post/rabbitmq/">
-        </link>
-        <updated>2021-10-20T14:01:52.000Z</updated>
     </entry>
 </feed>

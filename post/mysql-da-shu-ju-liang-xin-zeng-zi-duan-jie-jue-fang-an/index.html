@@ -46,17 +46,8 @@
             <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E4%B8%80-%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E9%9C%80%E8%A6%81%E8%B7%A8%E5%9F%9F">一、什么情况下需要跨域</a></li>
-<li><a href="#%E4%BA%8C-%E8%B7%A8%E5%9F%9F%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F">二、跨域常见的两种方式</a>
-<ul>
-<li><a href="#1-jsonp">1. JSONP</a></li>
-<li><a href="#2-%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90cors">2. 官方推荐：CORS</a>
-<ul>
-<li><a href="#spring-boot-%E9%80%9A%E8%BF%87-cors-%E5%AE%9E%E7%8E%B0%E8%B7%A8%E5%9F%9F">Spring Boot 通过 CORS 实现跨域</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90">原因分析</a></li>
+<li><a href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95">解决办法</a></li>
 </ul>
 </li>
 </ul>
@@ -161,181 +152,70 @@ document.write("你好阿！第" + visits + "位到访的朋友")
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">关于跨域</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">@ MySql 大数据量新增字段解决方案</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2021-11-03 / 6 min read
+          2021-11-29 / 2 min read
         </div>
         
-          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://haihaihai2015.github.io/post-images/guan-yu-kua-yu.jpg" alt="">
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://haihaihai2015.github.io/post-images/mysql-da-shu-ju-liang-xin-zeng-zi-duan-jie-jue-fang-an.jpg" alt="">
         
         <div class="post-content yue">
-          <h2 id="一-什么情况下需要跨域">一、什么情况下需要跨域</h2>
-<p>跨域问题源于浏览器的<strong>同源策略</strong>，所谓同源（即指在同一个域）就是两个页面具有相同的<strong>协议</strong>（http/https），<strong>主机</strong>（host）和<strong>端口号</strong>（port）。</p>
-<p>同源策略（Sameoriginpolicy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。</p>
-<p>那么跨域，说的就是：当一个请求url的<strong>协议</strong>、<strong>域名</strong>、<strong>端口</strong>三者之间任意一个与当前页面url不同即为跨域</p>
-<p>工作中我们经常需要获取其他服务的资源信息，这种时候就需要考虑跨域的问题。</p>
-<h2 id="二-跨域常见的两种方式">二、跨域常见的两种方式</h2>
-<h3 id="1-jsonp">1. JSONP</h3>
+          <p>需求是添加一个重试失败次数的字段到增量表中<br>
+在开发和测试环境执行速度还可以，但在培训环境执行的时候愣是报了超时<br>
+查了一下数据量在 800w左右，然后同事修改了mysql的默认超时时间，接着淦，半个小时还没执行完</p>
+<h2 id="原因分析">原因分析</h2>
+<p>求助度娘以后发现，MySql版本在5.XX的，确实存在这个问题，在8.0版本以后更换了算法，这种操作在毫秒级别就可以完成<br>
+<img src="https://haihaihai2015.github.io/post-images/1638167434265.jpg" alt="" loading="lazy"></p>
+<h2 id="解决办法">解决办法</h2>
+<p><strong>方案一、扩展新表方案</strong><br>
+扩展一张新表，添加关联字段和重试失败次数的字段，在以后操作的时候都使用关联查询</p>
 <ul>
-<li>JSONP是“JSON with padding”的简写，我将其翻译为“被包裹的JSON”。JSONP 是服务器与客户端跨源通信的常用方法。最大特点就是简单适用，兼容性好（兼容低版本IE）</li>
+<li>优点：不用迁移原数据</li>
+<li>劣势: 一旦新表的数据量很大 一样会耗时很长<br>
+<strong>方案二、老表数据迁移四部曲方案</strong></li>
 </ul>
-<p><strong>原理</strong><br>
-首先，我们应该清楚的认识到，浏览器的“同源策略”只是阻止了通过AJAX技术跨域获取资源，而并没有禁止跨域获取资源这件事本身，正因如此，我们可以通过&lt;link&gt;标签，&lt;img&gt;标签以及&lt;script&gt;标签中的href属性或src属性获取异域的CSS，JS资源和图片（虽然我们其实并不能读取这些资源的内容）。</p>
-<p>核心思想：网页通过添加一个&lt;script&gt;元素，向服务器请求 JSON 数据，服务器收到请求后，将数据放在一个指定名字的回调函数的参数位置传回来。</p>
-<p>JSONP的本质是绕过AJAX获取资源的机制，使用原始的src属性获取异域资源；</p>
 <ol>
-<li>原生实现</li>
+<li>新建老表的备份表并添加字段</li>
+<li>迁移老表到备份表</li>
+<li>删除老表</li>
+<li>备份表改名</li>
 </ol>
-<pre><code class="language-html">&lt;script src=&quot;http://test.com/data.php?callback=dosomething&quot;&gt;&lt;/script&gt;
-// 向服务器test.com发出请求，该请求的查询字符串有一个callback参数，用来指定回调函数的名字
- 
-// 处理服务器返回回调函数的数据
-&lt;script type=&quot;text/javascript&quot;&gt;
-    function dosomething(res){
-        // 处理获得的数据
-        console.log(res.data)
-    }
-&lt;/script&gt;
-</code></pre>
-<ol start="2">
-<li>jQuery ajax：</li>
-</ol>
-<pre><code class="language-java">$.ajax({
-    url: 'http://www.test.com:8080/login',
-    type: 'get',
-    dataType: 'jsonp',  // 请求方式为jsonp
-    jsonpCallback: &quot;handleCallback&quot;,    // 自定义回调函数名
-    data: {}
-});
-</code></pre>
-<ol start="3">
-<li>Vue.js</li>
-</ol>
-<pre><code class="language-java">this.$http.jsonp('http://www.domain2.com:8080/login', {
-    params: {},
-    jsonp: 'handleCallback'
-}).then((res) =&gt; {
-    console.log(res); 
-})
-</code></pre>
-<p><strong>JSONP的缺点</strong></p>
 <ul>
-<li>无法发送POST请求，也就是说JSONP技术只能用于请求异域资源，无法上传数据或修改异域数据；</li>
-<li>无法监测JSONP请求是否失败；</li>
-<li>可能存在安全隐患：别忘了，JSONP之所以能成功获取异域服务器资源，靠的是服务器动态生成了回调函数，并在页面中执行，那么如果服务器在原有的回调函数下再添加些别的恶意JavaScript代码会怎样？当然也会被执行！所以在使用JSONP技术时，一定要确保请求资源的服务器是值得信赖的；</li>
+<li>优势：不用再调整业务层的应用程序代码，只需要DBA迁移表即可</li>
+<li>劣势：新表可能会跟老表数据不一致，数据不完整；脱机操作过长可能会影响其他业务的正常运行<br>
+<strong>方案三、升级MySQL的服务器版本</strong></li>
 </ul>
-<h3 id="2-官方推荐cors">2. 官方推荐：CORS</h3>
+<ol>
+<li>将现有MySQL版本5.7升级到8.0.12之后的版本</li>
+<li>然后再执行添加字段操作</li>
+</ol>
 <ul>
-<li>CORS 是跨域资源分享（Cross-Origin Resource Sharing）的缩写。它是 W3C 标准，属于跨源 AJAX 请求的根本解决方法。</li>
+<li>优势：不影响业务层的应用程序代码，也不会导致数据丢失</li>
+<li>劣势：升级过程，必然要脱机，此过程时间过程一样会影响业务的正常运行</li>
 </ul>
-<h4 id="spring-boot-通过-cors-实现跨域">Spring Boot 通过 CORS 实现跨域</h4>
-<p><strong>1、全局配置</strong><br>
-可以通过实现WebMvcConfigurer接口然后重写addCorsMappings方法解决跨域问题。</p>
-<pre><code class="language-java">// 请求跨域
-@Configuration
-public class CorsConfig implements WebMvcConfigurer {
-       
-    static final String ORIGINS[] = new String[] { &quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot; };
- 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping(&quot;/**&quot;) // 所有的当前站点的请求地址，都支持跨域访问。
-                .allowedOrigins(&quot;*&quot;) // 所有的外部域都可跨域访问。 如果是localhost则很难配置，因为在跨域请求的时候，外部域的解析可能是localhost、127.0.0.1、主机名
-                .allowCredentials(true) // 是否支持跨域用户凭证
-                .allowedMethods(ORIGINS) // 当前站点支持的跨域请求类型是什么
-                .maxAge(3600); // 超时时长设置为1小时。 时间单位是秒。
-    }
- 
-}
-</code></pre>
-<p><strong>2.使用 @CrossOrigin 注解</strong><br>
-Controller层在需要跨域的类或者方法上加上该注解即可。</p>
-<pre><code class="language-java">@RestController
-@RequestMapping(&quot;/user&quot;)
-@RequiredArgsConstructor
-@CrossOrigin(origins = &quot;*&quot;,maxAge = 3600)
-public class UserController {
-	final UserService userService;
-	
-	@GetMapping(&quot;/getOne/{id}&quot;)
-	public User getOne(@PathVariable(&quot;id&quot;) Integer id) {
-		return userService.getById(id);
-	}
-}
-</code></pre>
-<p><strong>3、自定义跨域过滤器</strong><br>
-1).编写过滤器</p>
-<pre><code class="language-java">// 跨域过滤器
-@Component
-public class CORSFilter implements Filter {
- 
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//*号表示对所有请求都允许跨域访问
-        HttpServletResponse res = (HttpServletResponse) response;
-        res.addHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
-        res.addHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);
-        res.addHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;GET, POST, DELETE, PUT&quot;);
-        res.addHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;Content-Type,X-CAF-Authorization-Token,sessionToken,X-TOKEN&quot;);
-        if (((HttpServletRequest) request).getMethod().equals(&quot;OPTIONS&quot;)) {
-            response.getWriter().println(&quot;Success&quot;);
-            return;
-        }
-        chain.doFilter(request, response);
-    }
- 
-    @Override
-    public void destroy() {
- 
-    }
- 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
- 
-    }
-}
-</code></pre>
-<p>2).注册过滤器</p>
-<pre><code class="language-java">@Configuration
-public class CorsConfig {
- 
-    @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin(&quot;*&quot;);
-        corsConfiguration.addAllowedHeader(&quot;*&quot;);
-        corsConfiguration.addAllowedMethod(&quot;*&quot;);
-        corsConfiguration.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        urlBasedCorsConfigurationSource.registerCorsConfiguration(&quot;/**&quot;, corsConfiguration);
-        return new CorsFilter(urlBasedCorsConfigurationSource);
-    }
- 
-}
-</code></pre>
+<p>长远考虑，最后还是选择了方案三，升级到高版本后 因为引入了新的算法：即时算法 所以会毫秒级别的加字段 不会对业务发布上线造成影响</p>
 
         </div>
 
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://haihaihai2015.github.io/tag/q6NtPLsTg/">
+            <span class="flex-auto">MySql</span>
+          </a>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://haihaihai2015.github.io/tag/KpwDfIs7W/">
+            <span class="flex-auto">实战经验值</span>
+          </a>
         
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://haihaihai2015.github.io/post/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  @ 远程调用接口注意事项
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://haihaihai2015.github.io/post/sql-yu-ju-where-1-1-he-where-1lessgreater1-de-zuo-yong/">
+              <a href="https://haihaihai2015.github.io/post/li-yong-http-debugger-pro-java-shi-xian-zhua-qu-wang-ke-shi-pin-andpi-liang-xia-zai/">
                 <h3 class="post-title">
-                  @ Sql语句 where 1 = 1 和 where 1&lt;&gt;1 的作用
+                  利用HTTP Debugger Pro + JAVA 实现抓取网课视频&amp;批量下载
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
