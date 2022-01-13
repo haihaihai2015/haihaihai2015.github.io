@@ -40,30 +40,34 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            你是因为什么事进来的？
+            文章目录
           </p>
-          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%B8%80-bill_base-%E5%8D%95%E6%8D%AE%E5%9F%BA%E7%B1%BB">一、bill_base （单据基类）</a></li>
+<li><a href="#%E4%BA%8C-billentity_base%E5%AE%9E%E4%BD%93%E5%B1%82">二、billentity_base（实体层）</a></li>
+<li><a href="#%E4%B8%89-billtemplate_base%E6%A8%A1%E6%9D%BF%E5%B1%82">三、billtemplate_base（模板层）</a></li>
+<li><a href="#%E5%9B%9B-billtplgroup_base%E6%A8%A1%E6%9D%BF%E5%88%86%E5%8C%BA%E5%B1%82">四、billtplgroup_base（模板分区层）</a></li>
+<li><a href="#%E4%BA%94-billitem_base%E5%AD%97%E6%AE%B5%E5%B1%82">五、billitem_base（字段层）</a></li>
+<li><a href="#%E5%85%AD-pub_makebillrule%E8%A7%84%E5%88%99%E5%B1%82">六、pub_makebillrule（规则层）</a></li>
+<li><a href="#%E4%B8%83-pub_makebillrule_detail%E8%A7%84%E5%88%99%E8%AF%A6%E6%83%85%E5%B1%82">七、pub_makebillrule_detail（规则详情层）</a></li>
+<li><a href="#%E5%85%AB-pb_meta_filters%E8%BF%87%E6%BB%A4%E5%B1%82">八、pb_meta_filters（过滤层）</a></li>
+<li><a href="#%E4%B9%9D-pb_meta_filter_item%E8%BF%87%E6%BB%A4%E7%BB%86%E8%8A%82%E5%B1%82">九、pb_meta_filter_item（过滤细节层）</a></li>
+<li><a href="#%E5%8D%81-pb_filter_solution%E8%BF%87%E6%BB%A4%E6%96%B9%E6%A1%88%E5%B1%82">十、pb_filter_solution（过滤方案层）</a></li>
+<li><a href="#%E5%8D%81%E4%B8%80-pb_filter_solution_common%E8%BF%87%E6%BB%A4%E6%96%B9%E6%A1%88%E7%BB%86%E8%8A%82%E5%B1%82">十一、pb_filter_solution_common（过滤方案细节层）</a></li>
+<li><a href="#%E5%8D%81%E4%BA%8C-bill_toolbar%E5%B8%83%E5%B1%80%E5%B1%82">十二、bill_toolbar（布局层）</a></li>
+<li><a href="#%E5%8D%81%E4%B8%89-bill_toolbaritem%E5%B8%83%E5%B1%80%E7%BB%86%E8%8A%82%E5%B1%82">十三、bill_toolbaritem（布局细节层）</a></li>
+<li><a href="#%E5%8D%81%E5%9B%9B-bill_command%E5%8A%A8%E4%BD%9C%E5%B1%82">十四、bill_command（动作层）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
           </div>
         </div>
       
@@ -163,51 +167,126 @@ document.write("你好阿！第" + visits + "位到访的朋友")
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
-        <h2 class="text-lg text-gray-700 mb-8">
-          <i class="ri-bookmark-line"></i> MySql
-        </h2>
-        
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
-    
-      <a href="https://haihaihai2015.github.io/post/mysql-da-shu-ju-liang-xin-zeng-zi-duan-jie-jue-fang-an/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://haihaihai2015.github.io/post-images/mysql-da-shu-ju-liang-xin-zeng-zi-duan-jie-jue-fang-an.jpg'">
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">@ 关于MDF框架模型结构</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2022-01-13 / 2 min read
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/mysql-da-shu-ju-liang-xin-zeng-zi-duan-jie-jue-fang-an/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ MySql 大数据量新增字段解决方案</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-11-29 / 2 min read</div>
-    </div>
-  </section>
+        <div class="post-content yue">
+          <h3 id="一-bill_base-单据基类">一、bill_base （单据基类）</h3>
+<ol>
+<li>规定了单据的基本形式，比如是否为列表或单卡</li>
+<li>规定了单据的基本属性：默认显示模板、是否允许多模板、是否可以删除等</li>
+<li>绑定下层的对应关系：子产品ID、过滤ID</li>
+</ol>
+<h3 id="二-billentity_base实体层">二、billentity_base（实体层）</h3>
+<ol>
+<li>定义实体名称</li>
+<li>绑定数据源（用来给前端做对照关系）</li>
+</ol>
+<h3 id="三-billtemplate_base模板层">三、billtemplate_base（模板层）</h3>
+<ol>
+<li>每个单据都会有一个初始模板</li>
+<li>多个模板可能对应一个单据（billNum）</li>
+<li>自定义模板的属性：画幅宽度、打印设置、页眉页脚、固定列数、风格等等</li>
+</ol>
+<h3 id="四-billtplgroup_base模板分区层">四、billtplgroup_base（模板分区层）</h3>
+<ol>
+<li>模板需要进行排版分区分块，比如：基本信息、详细信息、摘要等等</li>
+<li>属性可以约束分区的排序、名称等</li>
+<li>需要绑定实体数据源</li>
+</ol>
+<h3 id="五-billitem_base字段层">五、billitem_base（字段层）</h3>
+<ol>
+<li>约束字段属性：名称、别名、长度等等</li>
+<li>需要绑定实体数据源</li>
+</ol>
+<h3 id="六-pub_makebillrule规则层">六、pub_makebillrule（规则层）</h3>
+<ol>
+<li>设置所有规则，按钮，按钮类型</li>
+</ol>
+<h3 id="七-pub_makebillrule_detail规则详情层">七、pub_makebillrule_detail（规则详情层）</h3>
+<ol>
+<li>设置规则详情，比如：字段来源、映射关系、计算公式等</li>
+<li>设置规则属性：是否回写、是否比较、是否修改等</li>
+</ol>
+<h3 id="八-pb_meta_filters过滤层">八、pb_meta_filters（过滤层）</h3>
+<ol>
+<li>设置过滤规则的基础信息：名称和描述</li>
+</ol>
+<h3 id="九-pb_meta_filter_item过滤细节层">九、pb_meta_filter_item（过滤细节层）</h3>
+<ol>
+<li>设置过滤详情：需过滤的字段、数据源</li>
+</ol>
+<h3 id="十-pb_filter_solution过滤方案层">十、pb_filter_solution（过滤方案层）</h3>
+<ol>
+<li>设置过滤方案的基础属性：方案id、名称、描述、是否公共等</li>
+</ol>
+<h3 id="十一-pb_filter_solution_common过滤方案细节层">十一、pb_filter_solution_common（过滤方案细节层）</h3>
+<ol>
+<li>将字段绑定到对应过滤的方案</li>
+</ol>
+<h3 id="十二-bill_toolbar布局层">十二、bill_toolbar（布局层）</h3>
+<ol>
+<li>设置单据编码和是否布局到表头表体</li>
+</ol>
+<h3 id="十三-bill_toolbaritem布局细节层">十三、bill_toolbaritem（布局细节层）</h3>
+<ol>
+<li>设置按钮名称、命令、是否显示在表头表体</li>
+</ol>
+<h3 id="十四-bill_command动作层">十四、bill_command（动作层）</h3>
+<ol>
+<li>为按钮绑定动作（规则）</li>
+</ol>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${1 * 0.2}s` }">
-    
-      <a href="https://haihaihai2015.github.io/post/sql-yu-ju-where-1-1-he-where-1lessgreater1-de-zuo-yong/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://haihaihai2015.github.io/post-images/sql-yu-ju-where-1-1-he-where-1lessgreater1-de-zuo-yong.jpg'">
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://haihaihai2015.github.io/post/sql-yu-ju-where-1-1-he-where-1lessgreater1-de-zuo-yong/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">@ Sql语句 where 1 = 1 和 where 1&lt;&gt;1 的作用</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2021-11-02 / 2 min read</div>
-    </div>
-  </section>
 
-        <div class="pagination-container animated fadeIn">
-  
-  
-</div>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://haihaihai2015.github.io/post/mysql-da-shu-ju-liang-xin-zeng-zi-duan-jie-jue-fang-an/">
+                <h3 class="post-title">
+                  @ MySql 大数据量新增字段解决方案
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '408ccb9fda5aff0a518a',
+    clientSecret: 'cad19055dc126a0da74f4c8de30ffbc73f1891f0',
+    repo: 'haihaihai2015.github.io',
+    owner: 'haihaihai2015',
+    admin: ['haihaihai2015'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
 
       </div>
     </div>
@@ -310,5 +389,6 @@ const closeMenu = () => {
 }
 </script>
   
+
   </body>
 </html>
