@@ -144,25 +144,107 @@ document.write("你好阿！第" + visits + "位到访的朋友")
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16"> 🎬 看过的电影</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">StopWatch（秒表）</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2021-10-29 / 1 min read
+          2022-04-20 / 3 min read
         </div>
         
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://haihaihai2015.github.io/post-images/stopwatchmiao-biao.webp" alt="">
+        
         <div class="post-content yue">
-          <head >
-<meta name="referrer" content="same-origin">
-<script src="https://cdn.jsdelivr.net/combine/npm/react@17.0.2/umd/react.production.min.js,npm/react-dom@17.0.2/umd/react-dom.production.min.js,gh/iMuFeng/bmdb@3.4.1/dist/bmdb.js"></script>
-<div class="container"></div>
-<script>
-        new Bmdb({
-            type: 'movie',
-            selector: '.container',
-            secret: 'NRx8tkiffxMaUls1EQa2BbcasH9GDyzBnWZ9J8WSwu3v70b0rjCR7eMBwMbbk5gz',
-            noMoreDataTips: '没有更多数据了'
-        })
-    </script>
-</head>
+          <p>有时我们在做开发的时候需要记录每个任务执行时间，或者记录一段代码执行时间，一般我们检测某段代码执行的时间，都是以下方式来进行的：<br>
+long start = System.currentTimeMillis();<br>
+new Random(); // 耗时操作<br>
+long end = System.currentTimeMillis();<br>
+System.out.println(end-start);</p>
+<p>有一说一，太不优雅了</p>
+<p>StopWatch实现<br>
+事实上spring自带了秒表工具类： org.springframework.util.StopWatch<br>
+还有apache大佬也有对应的工具类：org.apache.commons.lang.time.StopWatch</p>
+<p>直接看如何使用：<br>
+spring 版<br>
+public static void main(String[] args) throws InterruptedException {<br>
+StopWatch stopWatch = new StopWatch();</p>
+<pre><code>// 任务一模拟休眠3秒钟
+stopWatch.start(&quot;TaskOneName&quot;);
+Thread.sleep(1000 * 3);
+System.out.println(&quot;当前任务名称：&quot; + stopWatch.currentTaskName());
+stopWatch.stop();
+
+// 任务一模拟休眠10秒钟
+stopWatch.start(&quot;TaskTwoName&quot;);
+Thread.sleep(1000 * 10);
+System.out.println(&quot;当前任务名称：&quot; + stopWatch.currentTaskName());
+stopWatch.stop();
+
+// 任务一模拟休眠10秒钟
+stopWatch.start(&quot;TaskThreeName&quot;);
+Thread.sleep(1000 * 10);
+System.out.println(&quot;当前任务名称：&quot; + stopWatch.currentTaskName());
+stopWatch.stop();
+
+// 打印出耗时
+System.out.println(stopWatch.prettyPrint());
+System.out.println(stopWatch.shortSummary());
+// stop后它的值为null
+System.out.println(stopWatch.currentTaskName()); 
+
+// 最后一个任务的相关信息
+System.out.println(stopWatch.getLastTaskName());
+System.out.println(stopWatch.getLastTaskInfo());
+
+// 任务总的耗时  如果你想获取到每个任务详情（包括它的任务名、耗时等等）可使用
+System.out.println(&quot;所有任务总耗时：&quot; + sw.getTotalTimeMillis());
+System.out.println(&quot;任务总数：&quot; + sw.getTaskCount());
+System.out.println(&quot;所有任务详情：&quot; + sw.getTaskInfo());
+</code></pre>
+<p>}<br>
+apache 版<br>
+public static void main(String[] args) throws InterruptedException {<br>
+//创建后立即start，常用<br>
+StopWatch watch = StopWatch.createStarted();</p>
+<pre><code>// StopWatch watch = new StopWatch();
+// watch.start();
+
+Thread.sleep(1000);
+System.out.println(watch.getTime());
+System.out.println(&quot;统计从开始到现在运行时间：&quot; + watch.getTime() + &quot;ms&quot;);
+
+Thread.sleep(1000);
+watch.split();
+System.out.println(&quot;从start到此刻为止的时间：&quot; + watch.getTime());
+System.out.println(&quot;从开始到第一个切入点运行时间：&quot; + watch.getSplitTime());
+
+
+Thread.sleep(1000);
+watch.split();
+System.out.println(&quot;从开始到第二个切入点运行时间：&quot; + watch.getSplitTime());
+
+// 复位后, 重新计时
+watch.reset();
+watch.start();
+Thread.sleep(1000);
+System.out.println(&quot;重新开始后到当前运行时间是：&quot; + watch.getTime());
+
+// 暂停 与 恢复
+watch.suspend();
+System.out.println(&quot;暂停2秒钟&quot;);
+Thread.sleep(2000);
+
+// 上面suspend，这里要想重新统计，需要恢复一下
+watch.resume();
+System.out.println(&quot;恢复后执行的时间是：&quot; + watch.getTime());
+
+Thread.sleep(1000);
+watch.stop();
+
+System.out.println(&quot;花费的时间》》&quot; + watch.getTime() + &quot;ms&quot;);
+// 直接转成s
+System.out.println(&quot;花费的时间》》&quot; + watch.getTime(TimeUnit.SECONDS) + &quot;s&quot;);
+</code></pre>
+<p>}<br>
+[参考链接]:https://www.jb51.net/article/233720.htm</p>
+
         </div>
 
         
@@ -171,6 +253,15 @@ document.write("你好阿！第" + visits + "位到访的朋友")
         <div class="flex justify-between py-8">
           
 
+          
+            <div class="next-post">
+              <a href="https://haihaihai2015.github.io/post/guan-yu-stream-liu-he-for-xun-huan-xiao-lu/">
+                <h3 class="post-title">
+                  关于Stream流和For循环效率
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
           
         </div>
 
