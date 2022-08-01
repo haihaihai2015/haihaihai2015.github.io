@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://haihaihai2015.github.io</id>
     <title>海的博客</title>
-    <updated>2022-07-04T02:20:26.631Z</updated>
+    <updated>2022-08-01T03:01:13.633Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://haihaihai2015.github.io"/>
     <link rel="self" href="https://haihaihai2015.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://haihaihai2015.github.io/images/avatar.png</logo>
     <icon>https://haihaihai2015.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 海的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[@Mybatis标签使用心得]]></title>
+        <id>https://haihaihai2015.github.io/post/mybatis-biao-qian-shi-yong-xin-de/</id>
+        <link href="https://haihaihai2015.github.io/post/mybatis-biao-qian-shi-yong-xin-de/">
+        </link>
+        <updated>2022-08-01T02:59:28.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[@log4j打印堆栈信息]]></title>
         <id>https://haihaihai2015.github.io/post/log4j-da-yin-dui-zhan-xin-xi/</id>
@@ -72,12 +79,5 @@
         <link href="https://haihaihai2015.github.io/post/yuan-cheng-diao-yong-jie-kou-zhu-yi-shi-xiang/">
         </link>
         <updated>2021-11-09T07:21:29.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[关于跨域]]></title>
-        <id>https://haihaihai2015.github.io/post/guan-yu-kua-yu/</id>
-        <link href="https://haihaihai2015.github.io/post/guan-yu-kua-yu/">
-        </link>
-        <updated>2021-11-03T05:47:48.000Z</updated>
     </entry>
 </feed>
